@@ -13,8 +13,8 @@ public class ReviewServiceImpl implements ReviewService {
 	ReviewRepository reviewRepository;
 	
 	@Override
-	public List<Review> findByMovieTitle(String movie) {
-		return reviewRepository.findByMovieTitle(movie);
+	public List<Review> findByMovieId(String movieId) {
+		return reviewRepository.findByMovieId(movieId);
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import io.amritanshu.api.entity.Review;
 
 public interface ReviewService {
 
-	public List<Review> findByMovieTitle(String movie);
+	public List<Review> findByMovieId(String movieId);
 
 	public Review create(Review review);
 }
