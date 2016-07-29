@@ -14,8 +14,8 @@ public class ReviewRepositoryImpl implements ReviewRepository{
 	private EntityManager em;
 
 	@Override
-	public List<Review> findByMovieTitle(String movie) {
-		TypedQuery<Review> query = em.createNamedQuery("Review.findByMovieTitle", Review.class);
+	public List<Review> findByMovieId(String movieId) {
+		TypedQuery<Review> query = em.createNamedQuery("Review.findByMovieId", Review.class);
 		return query.getResultList();
 	}
 
