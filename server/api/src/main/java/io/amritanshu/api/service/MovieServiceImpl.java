@@ -38,10 +38,10 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	@Override
-	public Movie update(Movie movie) {
-		Movie existing = movieRepository.findByTitle(movie.getTitle());
+	public Movie update(String title, Movie movie) {
+		Movie existing = movieRepository.findByTitle(title);
 		if (existing == null) {
-			throw new MovieNotFoundException("Movie with title: " + movie.getTitle() + " not found");
+			throw new MovieNotFoundException("Movie with title: " + title + " not found");
 		}
 		return movieRepository.update(movie);
 	}

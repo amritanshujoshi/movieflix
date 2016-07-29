@@ -12,7 +12,7 @@ public interface MovieService {
 	
 	public Movie create(Movie movie);
 	
-	public Movie update(Movie movie);
+	public Movie update(String title, Movie movie);
 	
 	public void delete(String movie);
 
