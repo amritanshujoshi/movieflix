@@ -1,50 +1,58 @@
 package io.amritanshu.api.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+@Entity
+@Table
+@NamedQueries({
+	@NamedQuery(name = "Review.findByMovieId", query = "SELECT r from Review r WHERE r.movie.id=:pMovieId")
+})
 public class Review {
 
 	@Id
 	@GenericGenerator(name = "customUUID", strategy = "uuid2")
 	@GeneratedValue(generator = "customUUID")
-	private String reviewId;
+	private String id;
 
-	@OneToMany
-	private String userId;
+	@OneToOne
+	private User user;
 
-	@ManyToOne
-	private String movieId;
+	@OneToOne
+	private Movie movie;
 
 	private int rating;
 	private String comment;
 
 	public String getReviewId() {
-		return reviewId;
+		return id;
 	}
 
 	public void setReviewId(String reviewId) {
-		this.reviewId = reviewId;
+		this.id = reviewId;
 	}
 
-	public String getUserId() {
-		return userId;
+	public User getuser() {
+		return user;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public String getMovieId() {
-		return movieId;
+	public Movie getMovie() {
+		return movie;
 	}
 
-	public void setMovieId(String movieId) {
-		this.movieId = movieId;
+	public void setMovie(Movie movie) {
+		this.movie = movie;
 	}
 
 	public int getRating() {
