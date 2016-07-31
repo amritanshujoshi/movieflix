@@ -6,8 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.springframework.stereotype.Repository;
+
 import io.amritanshu.api.entity.Review;
 
+@Repository
 public class ReviewRepositoryImpl implements ReviewRepository{
 	
 	@PersistenceContext
@@ -16,7 +19,12 @@ public class ReviewRepositoryImpl implements ReviewRepository{
 	@Override
 	public List<Review> findByMovieId(String movieId) {
 		TypedQuery<Review> query = em.createNamedQuery("Review.findByMovieId", Review.class);
-		return query.getResultList();
+		query.setParameter("pMovieId", movieId);
+		List<Review> reviews = query.getResultList();
+		if(reviews != null) {
+			return reviews;
+		}
+		return null;
 	}
 
 	@Override
