@@ -24,19 +24,24 @@ public class UserController {
 	public List<User> findAll() {
 		return userService.findAll();
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public User findOne(@PathVariable("id") String userId) {
+		return userService.findOne(userId);
+	}
 
 	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public User create(@RequestBody User user) {
 		return userService.create(user);
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, path = "{username}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public User update(@PathVariable("username") String username, @RequestBody User user) {
-		return userService.update(username, user);
+	@RequestMapping(method = RequestMethod.PUT, path = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public User update(@PathVariable("id") String userId, @RequestBody User user) {
+		return userService.update(userId, user);
 	}
 
-	@RequestMapping(method = RequestMethod.DELETE, path = "{username}")
-	public void delete(@PathVariable("username") String username) {
-		userService.delete(username);
+	@RequestMapping(method = RequestMethod.DELETE, path = "{id}")
+	public void delete(@PathVariable("id") String userId) {
+		userService.delete(userId);
 	}
 }
