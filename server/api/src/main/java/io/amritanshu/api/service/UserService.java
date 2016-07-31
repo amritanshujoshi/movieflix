@@ -7,6 +7,8 @@ import io.amritanshu.api.entity.User;
 public interface UserService {
 	
 	public List<User> findAll();
+	
+	public User findOne(String id);
 
 	public User create(User user);
 
