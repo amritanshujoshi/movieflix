@@ -6,8 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.springframework.stereotype.Repository;
+
 import io.amritanshu.api.entity.User;
 
+@Repository
 public class UserRepositoryImpl implements UserRepository{
 
 	@PersistenceContext
@@ -17,6 +20,11 @@ public class UserRepositoryImpl implements UserRepository{
 	public List<User> findAll() {
 		TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
 		return query.getResultList();
+	}
+	
+	@Override
+	public User findOne(String id) {
+		return em.find(User.class, id);
 	}
 	
 	@Override
@@ -44,6 +52,6 @@ public class UserRepositoryImpl implements UserRepository{
 	@Override
 	public void delete(User user) {
 		em.remove(user);
-	}
+	}	
 
 }
