@@ -3,12 +3,15 @@ package io.amritanshu.api.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import io.amritanshu.api.entity.Movie;
 import io.amritanshu.api.exception.MovieExistsException;
 import io.amritanshu.api.exception.MovieNotFoundException;
 import io.amritanshu.api.repository.MovieRepository;
 
+@Service
 public class MovieServiceImpl implements MovieService{
 
 	@Autowired
@@ -29,15 +32,17 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	@Override
+	@Transactional
 	public Movie create(Movie movie) {
 		Movie existing = movieRepository.findByTitle(movie.getTitle());
-		if (existing == null) {
+		if (existing != null) {
 			throw new MovieExistsException("Movie already exists: " + movie.getTitle());
 		}
 		return movieRepository.create(movie);
 	}
 
 	@Override
+	@Transactional
 	public Movie update(String title, Movie movie) {
 		Movie existing = movieRepository.findByTitle(title);
 		if (existing == null) {
@@ -47,6 +52,7 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	@Override
+	@Transactional
 	public void delete(String movie) {
 		Movie existing = movieRepository.findByTitle(movie);
 		if (existing == null) {
