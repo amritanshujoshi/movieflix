@@ -3,10 +3,13 @@ package io.amritanshu.api.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import io.amritanshu.api.entity.Review;
 import io.amritanshu.api.repository.ReviewRepository;
 
+@Service
 public class ReviewServiceImpl implements ReviewService {
 
 	@Autowired
@@ -18,6 +21,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
+	@Transactional
 	public Review create(Review review) {
 		return reviewRepository.create(review);
 	}
