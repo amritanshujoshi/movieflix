@@ -1,18 +1,27 @@
 package io.amritanshu.api.entity;
 
-import java.util.List;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+@Entity
+@Table
+@NamedQueries({ 
+	@NamedQuery(name = "Movie.findAll", query = "SELECT m FROM Movie m ORDER BY m.title ASC"),
+	@NamedQuery(name = "Movie.findByTitle", query = "SELECT m FROM Movie m WHERE m.title=:pTitle") 
+})
 public class Movie {
 
 	@Id
 	@GenericGenerator(name = "customUUID", strategy = "uuid2")
 	@GeneratedValue(generator = "customUUID")
-	private String movieId;
+	private String id;
 
 	private String title;
 	private String year;
@@ -25,24 +34,28 @@ public class Movie {
 	// private List<Genre> genreList;
 
 	private String director;
+	
+	@Column(length = 1000)
 	private String writer;
+	
+	@Column(length = 1000)
 	private String actor;
 
+	@Column(length = 1000)
 	private String plot;
+	
 	private String awards;
 	private String imdbRating;
 	private String imdbVotes;
 	private String imdbID;
 	private String type;
 	
-	private List<Review> reviews;
-
-	public String getMovieId() {
-		return movieId;
+	public String getId() {
+		return id;
 	}
 
-	public void setMovieId(String movieId) {
-		this.movieId = movieId;
+	public void setId(String movieId) {
+		this.id = movieId;
 	}
 
 	public String getTitle() {
@@ -157,13 +170,9 @@ public class Movie {
 		this.type = type;
 	}
 	
-	public List<Review> getReviews() {
-		return reviews;
-	}
-
 	@Override
 	public String toString() {
-		return "Movie [id=" + movieId + ", Title=" + title + ", year=" + year + ", released=" + released + ", runtime="
+		return "Movie [id=" + id + ", Title=" + title + ", year=" + year + ", released=" + released + ", runtime="
 				+ runtime + ", Director=" + director + ", Writer=" + writer + ", Actors=" + actor + ", Plot:" + plot
 				+ ", Awards & Nominations:" + awards + ", IMDB Rating:" + imdbRating + ", IMDB ID:" + imdbID
 				+ ", IMDB Votes:" + imdbVotes + ", Type:" + type + "]";
