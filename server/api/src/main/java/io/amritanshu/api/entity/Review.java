@@ -3,9 +3,10 @@ package io.amritanshu.api.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -22,10 +23,12 @@ public class Review {
 	@GeneratedValue(generator = "customUUID")
 	private String id;
 
-	@OneToOne
+	@ManyToOne(optional=false)
+	@JoinColumn(name="user_id", referencedColumnName="id")
 	private User user;
 
-	@OneToOne
+	@ManyToOne(optional=false)
+	@JoinColumn(name="movie_id", referencedColumnName="id")
 	private Movie movie;
 
 	private int rating;
