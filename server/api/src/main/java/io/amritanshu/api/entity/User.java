@@ -1,21 +1,24 @@
 package io.amritanshu.api.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table
-@NamedQueries({
-	@NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username=:pUsername"),
-	@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u ORDER BY u.firstName ASC")
-})
+@NamedQueries({ @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username=:pUsername"),
+		@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u ORDER BY u.firstName ASC") })
 public class User {
 
 	@Id
@@ -25,7 +28,7 @@ public class User {
 
 	@Column(unique = true)
 	private String username;
-	
+
 	private String password;
 
 	private String firstName;
@@ -36,6 +39,10 @@ public class User {
 	private int zipCode;
 
 	private String role = "User";
+
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="user_id", referencedColumnName="id")
+	private List<Review> reviews;
 
 	public String getId() {
 		return id;
@@ -72,7 +79,7 @@ public class User {
 	public String getRole() {
 		return role;
 	}
-	
+
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -109,6 +116,9 @@ public class User {
 		this.role = role;
 	}
 
+	public List<Review> getReviews() {
+		return reviews;
+	}
 
 	@Override
 	public String toString() {
