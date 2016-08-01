@@ -12,8 +12,8 @@ public interface UserService {
 
 	public User create(User user);
 
-	public User update(String username, User user);
+	public User update(String id, User user);
 
-	public void delete(String username);
+	public void delete(String id);
 
 }
