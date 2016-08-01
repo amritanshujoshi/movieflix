@@ -1,21 +1,24 @@
 package io.amritanshu.api.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table
-@NamedQueries({ 
-	@NamedQuery(name = "Movie.findAll", query = "SELECT m FROM Movie m ORDER BY m.title ASC"),
-	@NamedQuery(name = "Movie.findByTitle", query = "SELECT m FROM Movie m WHERE m.title=:pTitle") 
-})
+@NamedQueries({ @NamedQuery(name = "Movie.findAll", query = "SELECT m FROM Movie m ORDER BY m.title ASC"),
+		@NamedQuery(name = "Movie.findByTitle", query = "SELECT m FROM Movie m WHERE m.title=:pTitle") })
 public class Movie {
 
 	@Id
@@ -31,25 +34,31 @@ public class Movie {
 	private String released;
 	private String runtime;
 
-	// private List<Genre> genreList;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="movie_id", referencedColumnName="id")
+	private List<Genre> genres;
 
 	private String director;
-	
+
 	@Column(length = 1000)
 	private String writer;
-	
+
 	@Column(length = 1000)
 	private String actor;
 
 	@Column(length = 1000)
 	private String plot;
-	
+
 	private String awards;
 	private String imdbRating;
 	private String imdbVotes;
 	private String imdbID;
 	private String type;
-	
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "movie_id", referencedColumnName = "id")
+	private List<Review> reviews;
+
 	public String getId() {
 		return id;
 	}
@@ -96,6 +105,14 @@ public class Movie {
 
 	public void setRuntime(String runtime) {
 		this.runtime = runtime;
+	}
+
+	public List<Genre> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
 	}
 
 	public String getDirector() {
@@ -169,7 +186,11 @@ public class Movie {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
 	@Override
 	public String toString() {
 		return "Movie [id=" + id + ", Title=" + title + ", year=" + year + ", released=" + released + ", runtime="
