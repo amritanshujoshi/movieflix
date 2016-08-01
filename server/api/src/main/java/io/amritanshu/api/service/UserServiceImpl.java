@@ -43,20 +43,20 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public User update(String username, User user) {
-		User existing = userRepository.findByUsername(username);
+	public User update(String id, User user) {
+		User existing = userRepository.findOne(id);
 		if (existing == null) {
-			throw new UserNotFoundException("User " + username + " not found.");
+			throw new UserNotFoundException("User with id:" + id + " not found.");
 		}
 		return userRepository.update(user);
 	}
 
 	@Override
 	@Transactional
-	public void delete(String username) {
-		User existing = userRepository.findByUsername(username);
+	public void delete(String id) {
+		User existing = userRepository.findOne(id);
 		if (existing == null) {
-			throw new UserNotFoundException("User " + username + " not found.");
+			throw new UserNotFoundException("User with id:" + id + " not found.");
 		}
 		userRepository.delete(existing);
 	}	
