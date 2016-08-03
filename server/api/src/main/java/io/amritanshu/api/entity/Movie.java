@@ -7,13 +7,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table
@@ -34,8 +35,8 @@ public class Movie {
 	private String released;
 	private String runtime;
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="movie_id", referencedColumnName="id")
+	@OneToMany(mappedBy="movie", cascade=CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Genre> genres;
 
 	private String director;
@@ -55,9 +56,9 @@ public class Movie {
 	private String imdbID;
 	private String type;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "movie_id", referencedColumnName = "id")
-	private List<Review> reviews;
+	@OneToMany(mappedBy="movie", cascade=CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Review> reviews;	
 
 	public String getId() {
 		return id;
@@ -189,6 +190,10 @@ public class Movie {
 
 	public List<Review> getReviews() {
 		return reviews;
+	}
+	
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 	@Override
