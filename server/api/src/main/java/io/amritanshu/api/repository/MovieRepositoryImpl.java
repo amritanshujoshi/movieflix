@@ -21,6 +21,11 @@ public class MovieRepositoryImpl implements MovieRepository {
 		TypedQuery<Movie> query = em.createNamedQuery("Movie.findAll", Movie.class);
 		return query.getResultList();
 	}
+	
+	@Override
+	public Movie findOne(String id) {
+		return em.find(Movie.class, id);
+	}
 
 	@Override
 	public Movie findByTitle(String title) {
