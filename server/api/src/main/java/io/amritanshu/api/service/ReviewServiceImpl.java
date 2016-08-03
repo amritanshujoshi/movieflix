@@ -22,8 +22,8 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	@Transactional
-	public Review create(Review review) {
-		return reviewRepository.create(review);
+	public Review create(String movie_id, String user_id, Review review) {
+		return reviewRepository.create(movie_id, user_id, review);
 	}
 
 }
