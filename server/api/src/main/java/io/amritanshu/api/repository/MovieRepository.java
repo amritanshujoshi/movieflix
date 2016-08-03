@@ -7,6 +7,8 @@ import io.amritanshu.api.entity.Movie;
 public interface MovieRepository {
 
 	public List<Movie> findAll();
+	
+	public Movie findOne(String id);
 
 	public Movie findByTitle(String title);
 
