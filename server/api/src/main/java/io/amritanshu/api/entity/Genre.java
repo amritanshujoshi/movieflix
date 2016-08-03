@@ -3,6 +3,7 @@ package io.amritanshu.api.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,6 +21,7 @@ public class Genre {
 	private String type;
 	
 	@ManyToOne
+	@JoinColumn(name="movie_id", referencedColumnName="id")
 	private Movie movie;
 
 	public String getId() {
