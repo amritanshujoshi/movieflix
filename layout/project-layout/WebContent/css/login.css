@@ -1,0 +1,28 @@
+@CHARSET "ISO-8859-1";
+
+h1 {
+    color: red;
+    text-align: center;
+}
+
+#loginDiv {
+    text-align: center;
+}
+
+.textboxes {
+    margin: 0.2em;
+    width: 10em;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-family: "Lucida Console", "Lucida Sans Typewriter", monaco,
+    "Bitstream Vera Sans Mono", monospace;
+    font-size: 1em;
+    padding: 0.5em;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.textboxLabels {
+    margin-right: 0.5em;
+}
