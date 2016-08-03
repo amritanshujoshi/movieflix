@@ -7,13 +7,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table
@@ -40,8 +41,8 @@ public class User {
 
 	private String role = "User";
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="user_id", referencedColumnName="id")
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Review> reviews;
 
 	public String getId() {
@@ -118,6 +119,10 @@ public class User {
 
 	public List<Review> getReviews() {
 		return reviews;
+	}
+	
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 	@Override
