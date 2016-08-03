@@ -25,9 +25,9 @@ public class ReviewController {
 		return reviewService.findByMovieId(movieId);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public Review create(@RequestBody Review review) {
-		return reviewService.create(review);
+	@RequestMapping(method = RequestMethod.POST, path = "{movie}/{user}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Review create(@PathVariable("movie") String movie_id, @PathVariable("user") String user_id, @RequestBody Review review) {
+		return reviewService.create(movie_id, user_id, review);
 	}
 
 }
