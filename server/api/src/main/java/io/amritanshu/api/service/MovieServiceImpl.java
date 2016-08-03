@@ -21,6 +21,15 @@ public class MovieServiceImpl implements MovieService{
 	public List<Movie> findAll() {
 		return movieRepository.findAll();
 	}
+	
+	@Override
+	public Movie findOne(String id) {
+		Movie existing = movieRepository.findOne(id);
+		if (existing == null) {
+			throw new MovieNotFoundException("User with id:" + id + " not found.");
+		}
+		return existing;
+	}
 
 	@Override
 	public Movie findByTitle(String movie) {
@@ -59,6 +68,6 @@ public class MovieServiceImpl implements MovieService{
 			throw new MovieNotFoundException("Movie with title: " + movie + " not found");
 		}
 		movieRepository.delete(existing);
-	}
+	}	
 
 }
