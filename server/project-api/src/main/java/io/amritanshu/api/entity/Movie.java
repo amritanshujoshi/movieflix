@@ -1,20 +1,14 @@
 package io.amritanshu.api.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table
@@ -23,7 +17,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 		@NamedQuery(name = "Movie.findByYear", query = "SELECT m FROM Movie m WHERE m.year=:pYear"),
 		@NamedQuery(name = "Movie.findByType", query = "SELECT m FROM Movie m WHERE m.type=:pType"),
 		@NamedQuery(name = "Movie.findTopRated", query = "SELECT m FROM Movie m WHERE type=:pType ORDER BY imdbRating desc"),
-		@NamedQuery(name = "Movie.findTopVoted", query = "SELECT m FROM Movie m WHERE type=:pType ORDER BY imdbVotes desc")})
+		@NamedQuery(name = "Movie.findTopVoted", query = "SELECT m FROM Movie m WHERE type=:pType ORDER BY imdbVotes desc") })
 public class Movie {
 
 	@Id
@@ -38,11 +32,6 @@ public class Movie {
 
 	private String released;
 	private String runtime;
-
-	/*@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@Enumerated(EnumType.ORDINAL)
-	private List<Genre> genres;*/
 
 	private String director;
 
@@ -60,10 +49,6 @@ public class Movie {
 	private int imdbVotes;
 	private String imdbID;
 	private String type;
-
-	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Review> reviews;
 
 	public String getId() {
 		return id;
@@ -113,13 +98,11 @@ public class Movie {
 		this.runtime = runtime;
 	}
 
-	/*public List<Genre> getGenres() {
-		return genres;
-	}
-
-	public void setGenres(List<Genre> genres) {
-		this.genres = genres;
-	}*/
+	/*
+	 * public List<Genre> getGenres() { return genres; }
+	 * 
+	 * public void setGenres(List<Genre> genres) { this.genres = genres; }
+	 */
 
 	public String getDirector() {
 		return director;
@@ -191,14 +174,6 @@ public class Movie {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public List<Review> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
 	}
 
 	@Override
