@@ -19,7 +19,11 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @Table
 @NamedQueries({ @NamedQuery(name = "Movie.findAll", query = "SELECT m FROM Movie m ORDER BY m.title ASC"),
-		@NamedQuery(name = "Movie.findByTitle", query = "SELECT m FROM Movie m WHERE m.title=:pTitle") })
+		@NamedQuery(name = "Movie.findByTitle", query = "SELECT m FROM Movie m WHERE m.title=:pTitle"),
+		@NamedQuery(name = "Movie.findByYear", query = "SELECT m FROM Movie m WHERE m.year=:pYear"),
+		@NamedQuery(name = "Movie.findByType", query = "SELECT m FROM Movie m WHERE m.type=:pType"),
+		@NamedQuery(name = "Movie.findTopRated", query = "SELECT m FROM Movie m WHERE type=:pType ORDER BY imdbRating desc"),
+		@NamedQuery(name = "Movie.findTopVoted", query = "SELECT m FROM Movie m WHERE type=:pType ORDER BY imdbVotes desc")})
 public class Movie {
 
 	@Id
@@ -28,16 +32,17 @@ public class Movie {
 	private String id;
 
 	private String title;
-	private String year;
+	private int year;
 
 	private String rated;
 
 	private String released;
 	private String runtime;
 
-	@OneToMany(mappedBy="movie", cascade=CascadeType.ALL)
+	/*@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Genre> genres;
+	@Enumerated(EnumType.ORDINAL)
+	private List<Genre> genres;*/
 
 	private String director;
 
@@ -51,14 +56,14 @@ public class Movie {
 	private String plot;
 
 	private String awards;
-	private String imdbRating;
-	private String imdbVotes;
+	private float imdbRating;
+	private int imdbVotes;
 	private String imdbID;
 	private String type;
 
-	@OneToMany(mappedBy="movie", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Review> reviews;	
+	private List<Review> reviews;
 
 	public String getId() {
 		return id;
@@ -76,11 +81,11 @@ public class Movie {
 		this.title = title;
 	}
 
-	public String getYear() {
+	public int getYear() {
 		return year;
 	}
 
-	public void setYear(String year) {
+	public void setYear(int year) {
 		this.year = year;
 	}
 
@@ -108,13 +113,13 @@ public class Movie {
 		this.runtime = runtime;
 	}
 
-	public List<Genre> getGenres() {
+	/*public List<Genre> getGenres() {
 		return genres;
 	}
 
 	public void setGenres(List<Genre> genres) {
 		this.genres = genres;
-	}
+	}*/
 
 	public String getDirector() {
 		return director;
@@ -156,19 +161,19 @@ public class Movie {
 		this.awards = awards;
 	}
 
-	public String getImdbRating() {
+	public float getImdbRating() {
 		return imdbRating;
 	}
 
-	public void setImdbRating(String imdbRating) {
+	public void setImdbRating(float imdbRating) {
 		this.imdbRating = imdbRating;
 	}
 
-	public String getImdbVotes() {
+	public int getImdbVotes() {
 		return imdbVotes;
 	}
 
-	public void setImdbVotes(String imdbVotes) {
+	public void setImdbVotes(int imdbVotes) {
 		this.imdbVotes = imdbVotes;
 	}
 
@@ -191,7 +196,7 @@ public class Movie {
 	public List<Review> getReviews() {
 		return reviews;
 	}
-	
+
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
