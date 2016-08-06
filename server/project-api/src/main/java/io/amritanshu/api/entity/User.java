@@ -1,20 +1,14 @@
 package io.amritanshu.api.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table
@@ -40,10 +34,6 @@ public class User {
 	private int zipCode;
 
 	private String role = "User";
-
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Review> reviews;
 
 	public String getId() {
 		return id;
@@ -115,14 +105,6 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
-	}
-
-	public List<Review> getReviews() {
-		return reviews;
-	}
-	
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
 	}
 
 	@Override
