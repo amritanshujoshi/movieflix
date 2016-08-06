@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import io.amritanshu.api.entity.Movie;
 import io.amritanshu.api.entity.Review;
-import io.amritanshu.api.entity.User;
-import io.amritanshu.api.exception.MovieNotFoundException;
-import io.amritanshu.api.exception.UserNotFoundException;
 
 @Repository
 public class ReviewRepositoryImpl implements ReviewRepository{
@@ -28,32 +26,23 @@ public class ReviewRepositoryImpl implements ReviewRepository{
 	UserRepository userRepository;
 
 	@Override
-	public List<Review> findByMovieId(String movieId) {
-		TypedQuery<Review> query = em.createNamedQuery("Review.findByMovieId", Review.class);
-		query.setParameter("pMovieId", movieId);
-		List<Review> reviews = query.getResultList();
-		if(reviews != null) {
-			return reviews;
-		}
-		return null;
+	public List<Review> findByMovie(Movie movie) {
+		TypedQuery<Review> query = em.createNamedQuery("Review.findByMovieTitle", Review.class);
+		query.setParameter("pMovie", movie);
+		return query.getResultList();
+	}
+	
+	@Override
+	public Double getAverageRating(Movie movie) {
+		Query query = em.createQuery("SELECT AVG(r.rating) from Review r WHERE r.movie=:pMovie");
+		query.setParameter("pMovie", movie);
+		return (Double)query.getSingleResult();
 	}
 
 	@Override
-	public Review create(String movie_id, String user_id, Review review) {
-		Movie mExisting = movieRepository.findOne(movie_id);
-		User uExisting = userRepository.findOne(user_id);
-		if(mExisting == null) {
-			throw new MovieNotFoundException("");
-		}
-		if(uExisting == null) {
-			throw new UserNotFoundException("");
-		}
-		mExisting.getReviews().add(review);
-		uExisting.getReviews().add(review);
-		review.setUser(uExisting);
-		review.setMovie(mExisting);
+	public Review create(Review review) {
 		em.persist(review);
 		return review;
-	}
+	}	
 
 }
