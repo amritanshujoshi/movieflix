@@ -3,10 +3,9 @@ package io.amritanshu.api.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -14,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table
 @NamedQueries({
-	@NamedQuery(name = "Review.findByMovieId", query = "SELECT r from Review r WHERE r.movie.id=:pMovieId")
+	@NamedQuery(name = "Review.findByMovieTitle", query = "SELECT r from Review r WHERE r.movie=:pMovie")
 })
 public class Review {
 
@@ -23,12 +22,10 @@ public class Review {
 	@GeneratedValue(generator = "customUUID")
 	private String id;
 
-	@ManyToOne
-	@JoinColumn(name="user_id", referencedColumnName="id")
+	@OneToOne
 	private User user;
 
-	@ManyToOne
-	@JoinColumn(name="movie_id", referencedColumnName="id")
+	@OneToOne
 	private Movie movie;
 
 	private int rating;
@@ -42,7 +39,7 @@ public class Review {
 		this.id = reviewId;
 	}
 
-	public User getuser() {
+	public User getUser() {
 		return user;
 	}
 
