@@ -6,7 +6,9 @@ import io.amritanshu.api.entity.Review;
 
 public interface ReviewService {
 
-	public List<Review> findByMovieId(String movieId);
+	public List<Review> findByMovieTitle(String movie);
+	
+	public Double getAverageRating(String title);
 
-	public Review create(String movie_id, String user_id, Review review);
+	public Review create(String mId, String uId, Review review);	
 }
