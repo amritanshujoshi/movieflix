@@ -37,6 +37,34 @@ public class MovieRepositoryImpl implements MovieRepository {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<Movie> findByYear(int year) {
+		TypedQuery<Movie> query = em.createNamedQuery("Movie.findByYear", Movie.class);
+		query.setParameter("pYear", year);
+		return query.getResultList();
+	}
+	
+	@Override
+	public List<Movie> findByType(String type) {
+		TypedQuery<Movie> query = em.createNamedQuery("Movie.findByType", Movie.class);
+		query.setParameter("pType", type);
+		return query.getResultList();
+	}
+	
+	@Override
+	public List<Movie> findTopRated(String type) {
+		TypedQuery<Movie> query = em.createNamedQuery("Movie.findTopRated", Movie.class);
+		query.setParameter("pType", type);
+		return query.getResultList();
+	}
+	
+	@Override
+	public List<Movie> findTopVoted(String type) {
+		TypedQuery<Movie> query = em.createNamedQuery("Movie.findTopVoted", Movie.class);
+		query.setParameter("pType", type);
+		return query.getResultList();
+	}
 
 	@Override
 	public Movie create(Movie movie) {
@@ -52,6 +80,6 @@ public class MovieRepositoryImpl implements MovieRepository {
 	@Override
 	public void delete(Movie movie) {
 		em.remove(movie);
-	}
+	}		
 
 }

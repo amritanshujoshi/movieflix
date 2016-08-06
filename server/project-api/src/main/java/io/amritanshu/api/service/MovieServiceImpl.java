@@ -39,6 +39,26 @@ public class MovieServiceImpl implements MovieService{
 		}
 		return existing;
 	}
+	
+	@Override
+	public List<Movie> findByYear(int year) {
+		return movieRepository.findByYear(year);
+	}
+	
+	@Override
+	public List<Movie> findByType(String type) {
+		return movieRepository.findByType(type);
+	}
+	
+	@Override
+	public List<Movie> findTopRated(String type) {
+		return movieRepository.findTopRated(type);
+	}	
+	
+	@Override
+	public List<Movie> findTopVoted(String type) {
+		return movieRepository.findTopVoted(type);
+	}
 
 	@Override
 	@Transactional

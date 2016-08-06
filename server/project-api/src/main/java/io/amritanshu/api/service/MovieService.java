@@ -11,7 +11,15 @@ public interface MovieService {
 	public Movie findOne(String id);
 
 	public Movie findByTitle(String movie);
-
+	
+	public List<Movie> findByYear(int year);
+	
+	public List<Movie> findByType(String type);
+	
+	public List<Movie> findTopRated(String type);
+	
+	public List<Movie> findTopVoted(String type);
+	
 	public Movie create(Movie movie);
 
 	public Movie update(String title, Movie movie);
