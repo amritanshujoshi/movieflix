@@ -16,6 +16,8 @@ public interface MovieRepository {
 	
 	public List<Movie> findByType(String type);
 	
+	public List<Movie> findByGenre(String genre);
+	
 	public List<Movie> findTopRated(String type);
 	
 	public List<Movie> findTopVoted(String type);

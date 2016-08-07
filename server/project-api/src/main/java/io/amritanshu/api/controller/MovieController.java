@@ -40,6 +40,11 @@ public class MovieController {
 		return movieService.findByType(type);
 	}
 	
+	@RequestMapping(method = RequestMethod.GET, path = "byGenre/{name}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Movie> findByGenre(@PathVariable("name") String name) {
+		return movieService.findByGenre(name);
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, path = "topRated/{type}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Movie> findTopRated(@PathVariable("type") String type) {
 		return movieService.findTopRated(type);

@@ -1,14 +1,21 @@
 package io.amritanshu.api.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table
@@ -16,6 +23,7 @@ import org.hibernate.annotations.GenericGenerator;
 		@NamedQuery(name = "Movie.findByTitle", query = "SELECT m FROM Movie m WHERE m.title=:pTitle"),
 		@NamedQuery(name = "Movie.findByYear", query = "SELECT m FROM Movie m WHERE m.year=:pYear"),
 		@NamedQuery(name = "Movie.findByType", query = "SELECT m FROM Movie m WHERE m.type=:pType"),
+		@NamedQuery(name = "Movie.findByGenre", query = "SELECT m FROM Movie m JOIN m.genres g WHERE g.name=:pGenreName"),
 		@NamedQuery(name = "Movie.findTopRated", query = "SELECT m FROM Movie m WHERE type=:pType ORDER BY imdbRating desc"),
 		@NamedQuery(name = "Movie.findTopVoted", query = "SELECT m FROM Movie m WHERE type=:pType ORDER BY imdbVotes desc") })
 public class Movie {
@@ -32,6 +40,13 @@ public class Movie {
 
 	private String released;
 	private String runtime;
+
+	@Transient
+	private Set<String> genreList;
+
+	@ManyToMany(cascade=CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private Set<Genre> genres;
 
 	private String director;
 
@@ -98,11 +113,19 @@ public class Movie {
 		this.runtime = runtime;
 	}
 
-	/*
-	 * public List<Genre> getGenres() { return genres; }
-	 * 
-	 * public void setGenres(List<Genre> genres) { this.genres = genres; }
-	 */
+	public Set<String> getGenreList() {
+		return genreList;
+	}
+
+	public Set<Genre> getGenres() {
+		return genres;
+	}
+
+	public void addGenres(Genre genre) {
+		if (!getGenres().contains(genre)) {
+			getGenres().add(genre);
+		}
+	}
 
 	public String getDirector() {
 		return director;

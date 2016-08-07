@@ -16,6 +16,8 @@ public interface MovieService {
 	
 	public List<Movie> findByType(String type);
 	
+	public List<Movie> findByGenre(String name);
+	
 	public List<Movie> findTopRated(String type);
 	
 	public List<Movie> findTopVoted(String type);
