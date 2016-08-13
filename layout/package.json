@@ -1,0 +1,10 @@
+{
+  "name": "layout",
+  "version": "0.0.1",
+  "description": "layout project for movieflix",
+  "author": "Amritanshu Joshi",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
