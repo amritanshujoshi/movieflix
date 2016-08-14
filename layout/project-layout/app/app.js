@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('movieflix', ['ngRoute', 'ngMessages'])
+        .module('movieflix', ['ngRoute'])
         .config(moduleConfig);
 
     function moduleConfig($routeProvider) {
@@ -14,7 +14,7 @@
                 controllerAs: 'moviesVm'
             })
             .otherwise({
-                redirectTo: '/users/movies'
+                redirectTo: '/user/movies'
             });
             /*.when('/user/movie/:id', {
                 templateUrl: 'app/user/views/movie-detail.tmpl.html',
