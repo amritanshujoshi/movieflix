@@ -5,9 +5,9 @@
         .module('movieflix')
         .service('movieService', movieService);
 
-    movieService.$inject = ['$http', '$q', 'CONFIG'];
+    movieService.$inject = ['$http', '$q'];
 
-    function movieService($http, $q, CONFIG) {
+    function movieService($http, $q) {
 
         var self = this;
 
@@ -15,16 +15,17 @@
         self.getMovieById = getMovieById;
 
         function getMovies() {
-            return $http.get(CONFIG.API_HOST + '/movies')
+            return $http.get('http://localhost:8080/project-api/api/movies')
                 .then(successFn, errorFn);
         }
 
         function getMovieById(id) {
-            return $http.get(CONFIG.API_HOST + '/movies/' + id)
+            return $http.get('http://localhost:8080/project-api/api/movies/' + id)
                 .then(successFn, errorFn);
         }
 
         function successFn(response) {
+            console.log(response.data);
             return response.data;
         }
 
