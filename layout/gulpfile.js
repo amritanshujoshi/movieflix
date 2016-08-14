@@ -1,19 +1,50 @@
-var gulp = require('gulp');
+var gulp = require('gulp'),
+    clean = require('gulp-clean'),
+    inject = require('gulp-inject'),
+    bowerFiles = require('main-bower-files'),
+    angularFileSort = require('gulp-angular-filesort'),
+    browserSync = require('browser-sync').create();
 
-gulp.task('sometask', function () {
-    //get source files
-    //perform actions
-    //put results somewhere
+
+var config = {
+    paths: {
+        src: './project-layout',
+        build: './build',
+        bower: './bower_components'
+    }
+};
+
+gulp.task('clean', function() {
+    return gulp.src(config.paths.build, {read: false})
+        .pipe(clean());
 });
 
-gulp.task('styles', function () {
-    //get source files
-    //perform actions
-    //put results somewhere
+gulp.task('inject', function() {
+    var cssFiles = gulp.src([
+        config.paths.src + '/**/*.css'
+    ], {read: false});
+
+    var jsFiles = gulp.src([
+        config.paths.src + '/**/*.js'
+    ], {read: false});
+
+    return gulp.src(config.paths.src + '/index.html')
+        .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower'}))
+        .pipe(inject(cssFiles, {ignorePath: 'project-layout', addRootSlash: false}))
+        .pipe(inject(jsFiles, {ignorePath: 'project-layout', addRootSlash: false}))
+        .pipe(gulp.dest(config.paths.build));
 });
 
-gulp.task('scripts', function () {
-    //get source files
-    //perform actions
-    //put results somewhere
+gulp.task('serve', ['inject'], function() {
+    browserSync.init({
+        server: {
+            baseDir: [config.paths.build, config.paths.bower, config.paths.src],
+            routes: {
+                '/bower_components': 'bower_components'
+            }
+        },
+        files: [
+            config.paths.src + '/**'
+        ]
+    });
 });
