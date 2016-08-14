@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('movieflix')
+        .module('movieflix', ['ngRoute'])
         .constant('CONFIG', {
-            'API_HOST': 'http://localhost:8080/api/project-api'
+            'API_HOST': 'http://localhost:8080/project-api/api'
         });
 })();
