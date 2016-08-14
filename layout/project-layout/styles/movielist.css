@@ -1,0 +1,8 @@
+.list {
+    margin-top: 1em;
+    font-size: 2em;
+}
+
+.listlink:hover {
+    text-decoration: none;
+}
