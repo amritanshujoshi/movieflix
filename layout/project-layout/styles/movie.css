@@ -1,0 +1,107 @@
+.navbar {
+    border-radius: 10px;
+    background: deepskyblue;
+}
+
+.navbar-nav li {
+    font-size: 1.5em;
+}
+
+.page-title {
+    margin: -1.5em 0 0 0;
+}
+
+.searchBox {
+    width: 90%;
+    margin: 0 0 0 3.5em;
+}
+
+.list {
+    margin-top: 1em;
+    font-size: 2em;
+}
+
+.listlink:hover {
+    text-decoration: none;
+}
+
+.movieDetails {
+    background: lightgrey;
+    font-size: 2em;
+    border-radius: 10px;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.label {
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 1em;
+    margin-top: 5em;
+}
+
+.movieTitle {
+    margin-top: 0;
+    margin-left: 0.7em;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.movieYear {
+    margin-top: 4.5em;
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.movieRated {
+    margin-top: 4.5em;
+    margin-left: 0;
+}
+
+.movieRelease {
+    margin-top: 20em;
+    margin-left: 1.5em;
+    margin-bottom: 2.5em;
+}
+
+.movieGenre {
+    font-weight: bold;
+    margin: 0 0 0.8em 1.5em;
+}
+
+.movieDirector {
+    margin: 0.5em 0 0 0;
+}
+
+.movieWriters {
+    margin: -1em 0 0 0;
+}
+
+.writers {
+    margin: -1.3em 0 -0.5em 6.8em;
+}
+
+.movieActors {
+    margin: -1em 0 0 0;
+}
+
+.actors {
+    margin: -1.3em 0 -0.5em 6.3em;
+}
+
+.moviePlot {
+    margin: -1em 0 0 0;
+}
+
+.plot {
+    margin: -1.3em 0 -0.5em 5em;
+}
+
+.movieAwards {
+    margin: -1em 0 0 0;
+}
+
+.imdbDetails {
+    margin: -1em 0 -1em 0;
+}

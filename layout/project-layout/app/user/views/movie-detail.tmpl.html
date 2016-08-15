@@ -1,0 +1,28 @@
+<div class="container">
+    <h2>Movie Details<a href="#users/movies" class="pull-right btn btn-link">Back</a></h2>
+    <div class="movieDetails">
+        <p>
+            <span class="movieTitle">{{movieDetailVm.movie.title}}</span>
+            <span class="movieYear">{{movieDetailVm.movie.year}} | </span>
+            <span class="movieRated">{{movieDetailVm.movie.rated}}</span><br>
+            <span class="movieRelease">{{movieDetailVm.movie.released}}</span>
+            <span class="label">Running Time:</span> {{movieDetailVm.movie.runtime}}<br>
+        </p>
+        <p class="movieGenre"><span ng-repeat="genre in movieDetailVm.movie.genres"> {{genre.name}} </span></p>
+        <p class="movieDirector" ng-if="movieDetailVm.movie.director != 'N/A'"><span class="label">Director:</span>
+            {{movieDetailVm.movie.director}}</p><br>
+        <p class="movieWriters"><span class="label">Writers:</span>
+        <p class="writers">{{movieDetailVm.movie.writer}}</p></p><br>
+        <p class="movieActors"><span class="label">Actors:</span>
+        <p class="actors">{{movieDetailVm.movie.actor}}</p></p><br>
+        <p class="moviePlot"><span class="label">Plot:</span>
+        <p class="plot">{{movieDetailVm.movie.plot}}</p></p><br>
+        <p class="movieAwards"><span class="label">Awards and Nominations:</span> {{movieDetailVm.movie.awards}}</p><br>
+        <p class="imdbDetails">
+            <span class="label">IMDB Rating:</span> {{movieDetailVm.movie.imdbRating}}/10
+            <span class="label">IMDB Votes:</span> {{movieDetailVm.movie.imdbVotes}}
+            <span class="label">IMDB Profile:</span> <a
+                ng-href='http://www.imdb.com/title/{{movieDetailVm.movie.imdbID}}' target="_blank">Go
+            to IMDB Profile</a></p><br>
+    </div>
+</div>
