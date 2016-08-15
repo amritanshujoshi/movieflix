@@ -12,20 +12,29 @@
         var self = this;
 
         self.getMovies = getMovies;
-        self.getMovieById = getMovieById;
+        self.getMovieByTitle = getMovieByTitle;
+        self.deleteMovie = deleteMovie;
 
         function getMovies() {
             return $http.get('http://localhost:8080/project-api/api/movies')
                 .then(successFn, errorFn);
         }
 
-        function getMovieById(id) {
-            return $http.get('http://localhost:8080/project-api/api/movies/' + id)
+        function getMovieByTitle(title) {
+            return $http.get('http://localhost:8080/project-api/api/movies/' + title)
                 .then(successFn, errorFn);
         }
 
+        function deleteMovie(title, data) {
+            return $http.delete('http://localhost:8080/project-api/api/movies/' + title, data)
+                .then(delSuccessFn, errorFn)
+        }
+
+        function delSuccessFn() {
+            return 'Movie Deleted!!';
+        }
+
         function successFn(response) {
-            console.log(response.data);
             return response.data;
         }
 

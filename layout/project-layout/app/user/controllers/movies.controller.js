@@ -14,7 +14,6 @@
         init();
 
         function init() {
-            console.log('MoviesController');
 
             moviesVm.sorter = {
                 by: 'title',
