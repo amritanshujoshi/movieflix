@@ -1,67 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Movieflix - Registration</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="styles/normalize.css.css">
-    <link rel="stylesheet" type="text/css" href="../../styles/login.css">
-</head>
-<body>
-<h1>MOVIEFLIX - Registration</h1>
-
-<div class="container-fluid">
-
-    <form class="col-md-2 col-md-offset-5">
-        <div class="form-group">
-            <div class="icon-addon addon-md">
-                <input type="text" class="form-control" id="username" placeholder="Username">
-                <span class="glyphicon glyphicon-remove-circle"></span>
-            </div>
+<form name="userForm" ng-submit="userForm.$setPristine(); addUserVm.addUser()" novalidate>
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" ng-model="addUserVm.newUser.firstName" required minlength="4">
+        <div ng-messages="userForm.firstName.$error" ng-if="userForm.firstName.$dirty">
+            <p ng-message="required" class="error">First Name is required</p>
+            <p ng-message="minlength" class="error">First Name has to be at least 4 chars</p>
         </div>
-        <div class="form-group">
-            <div class="icon-addon addon-md">
-                <input type="password" class="form-control" id="password" placeholder="Password">
-                <span class="glyphicon glyphicon-remove-circle"></span>
-            </div>
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" ng-model="addUserVm.newUser.lastName" required minlength="4">
+        <div ng-messages="userForm.lastName.$error" ng-if="userForm.lastName.$dirty">
+            <p ng-message="required" class="error">Last Name is required</p>
+            <p ng-message="minlength" class="error">Last Name has to be at least 4 chars</p>
         </div>
-        <div class="form-group">
-            <div class="icon-addon addon-md">
-                <input type="text" class="form-control" id="firstname" placeholder="First Name">
-                <span class="glyphicon glyphicon-remove-circle"></span>
-            </div>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Email" ng-model="addUserVm.newUser.email" required>
+        <div ng-messages="userForm.email.$error" ng-if="userForm.email.$dirty">
+            <p ng-message="required" class="error">Email is required</p>
+            <p ng-message="email" class="error">Email is invalid</p>
         </div>
-        <div class="form-group">
-            <div class="icon-addon addon-md">
-                <input type="text" class="form-control" id="lastname" placeholder="Last Name">
-                <span class="glyphicon glyphicon-remove-circle"></span>
-            </div>
+    </div>
+    <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" class="form-control" id="city" name="city" placeholder="City" ng-model="addUserVm.newUser.address.city" required>
+        <div ng-messages="userForm.city.$error" ng-if="userForm.city.$dirty">
+            <p ng-message="required" class="error">City is required</p>
         </div>
-        <div class="form-group">
-            <div class="icon-addon addon-md">
-                <input type="text" class="form-control" id="city" placeholder="City">
-                <span class="glyphicon glyphicon-remove-circle"></span>
-            </div>
+    </div>
+    <div class="form-group">
+        <label for="company">Company</label>
+        <input type="text" class="form-control" id="company" name="company" placeholder="Company" ng-model="addUserVm.newUser.company.name" required>
+        <div ng-messages="userForm.company.$error" ng-if="userForm.company.$dirty">
+            <p ng-message="required" class="error">Company is required</p>
         </div>
-        <div class="form-group">
-            <div class="icon-addon addon-md">
-                <input type="text" class="form-control" id="state" placeholder="State">
-                <span class="glyphicon glyphicon-remove-circle"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="icon-addon addon-md">
-                <input type="text" class="form-control" id="zip" placeholder="Zip Code">
-                <span class="glyphicon glyphicon-remove-circle"></span>
-            </div>
-        </div>
-        <div class="form-group ">
-            <button type="submit" class="btn btn-default">Register</button>
-        </div>
-    </form>
-
-
-</div>
-</body>
-</html>
+    </div>
+    <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
+</form>
