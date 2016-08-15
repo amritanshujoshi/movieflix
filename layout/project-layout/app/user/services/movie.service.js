@@ -13,7 +13,11 @@
 
         self.getMovies = getMovies;
         self.getMovieByTitle = getMovieByTitle;
-        self.deleteMovie = deleteMovie;
+        self.getTopRatedMovies = getTopRatedMovies;
+        self.getTopVotedMovies = getTopVotedMovies;
+        self.getTopRatedSeries = getTopRatedSeries;
+        self.getTopVotedSeries = getTopVotedSeries;
+        /*self.deleteMovie = deleteMovie;*/
 
         function getMovies() {
             return $http.get('http://localhost:8080/project-api/api/movies')
@@ -25,14 +29,34 @@
                 .then(successFn, errorFn);
         }
 
-        function deleteMovie(title, data) {
+        function getTopRatedMovies() {
+            return $http.get('http://localhost:8080/project-api/api/movies/topRated/movie')
+                .then(successFn, errorFn);
+        }
+
+        function getTopVotedMovies() {
+            return $http.get('http://localhost:8080/project-api/api/movies/topVoted/movie')
+                .then(successFn, errorFn);
+        }
+
+        function getTopRatedSeries() {
+            return $http.get('http://localhost:8080/project-api/api/movies/topRated/series')
+                .then(successFn, errorFn);
+        }
+
+        function getTopVotedSeries() {
+            return $http.get('http://localhost:8080/project-api/api/movies/topVoted/series')
+                .then(successFn, errorFn);
+        }
+
+        /*function deleteMovie(title, data) {
             return $http.delete('http://localhost:8080/project-api/api/movies/' + title, data)
                 .then(delSuccessFn, errorFn)
         }
 
         function delSuccessFn() {
             return 'Movie Deleted!!';
-        }
+        }*/
 
         function successFn(response) {
             return response.data;

@@ -28,13 +28,13 @@
                     console.log(error);
                 });
 
-            movieService
+            /*movieService
                 .deleteMovie($routeParams.title, $routeParams)
                 .then(function (movie) {
                     console.log(movie.title + ' has been deleted!!');
                 }, function (error) {
                     console.log(error);
-                });
+                });*/
         }
 
         function changeSort(prop) {
