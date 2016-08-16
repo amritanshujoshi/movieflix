@@ -1,0 +1,17 @@
+label {
+    font-size: 1.8em;
+}
+
+p[ng-message] {
+    font-size: 1.5em;
+    color: red;
+}
+
+.formButton {
+    text-align: center;
+}
+
+.registerButton {
+    margin-top: 2em;
+    font-size: 1.5em;
+}

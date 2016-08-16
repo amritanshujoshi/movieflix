@@ -3,18 +3,18 @@
 
     angular
         .module('movieflix')
-        .service('signupService', signupService);
+        .service('loginService', loginService);
 
-    signupService.$inject = ['$http', '$q'];
+    loginService.$inject = ['$http', '$q'];
 
-    function signupService($http, $q) {
+    function loginService($http, $q) {
 
         var self = this;
 
-        self.createUser = createUser;
+        self.loginUser = loginUser;
 
-        function createUser(data) {
-            return $http.post('http://localhost:8080/project-api/api/users', data)
+        function loginUser(data) {
+            return $http.post('http://localhost:8080/project-api/api/users/login', data)
                 .then(successFn, errorFn);
         }
 

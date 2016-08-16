@@ -1,41 +1,66 @@
-<form name="userForm" ng-submit="userForm.$setPristine(); addUserVm.addUser()" novalidate>
-    <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" ng-model="addUserVm.newUser.firstName" required minlength="4">
-        <div ng-messages="userForm.firstName.$error" ng-if="userForm.firstName.$dirty">
-            <p ng-message="required" class="error">First Name is required</p>
-            <p ng-message="minlength" class="error">First Name has to be at least 4 chars</p>
+<div class="container">
+    <nav class="navbar navbar-default nav-pills">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand page-title" href="#/user/movies"><h2>Movieflix</h2>
+                </a>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+    <form name="signupForm" ng-submit="signupForm.$setPristine(); signupVm.addUser()">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name"
+                   ng-model="signupVm.newUser.firstName" required pattern="^[a-zA-Z]+$">
+            <div ng-messages="signupForm.firstName.$error" ng-if="signupForm.firstName.$dirty">
+                <p ng-show="signupForm.firstName.$error.required" ng-message="required" class="error">First Name is required</p>
+                <p ng-show="signupForm.firstName.$error.pattern" ng-message="pattern" class="error">First Name is invalid</p>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="lastName">Last Name</label>
-        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" ng-model="addUserVm.newUser.lastName" required minlength="4">
-        <div ng-messages="userForm.lastName.$error" ng-if="userForm.lastName.$dirty">
-            <p ng-message="required" class="error">Last Name is required</p>
-            <p ng-message="minlength" class="error">Last Name has to be at least 4 chars</p>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name"
+                   ng-model="signupVm.newUser.lastName" required pattern="^[a-zA-Z]+$">
+            <div ng-messages="signupForm.lastName.$error" ng-if="signupForm.lastName.$dirty">
+                <p ng-show="signupForm.lastName.$error.required" ng-message="required" class="error">Last Name is required</p>
+                <p ng-show="signupForm.lastName.$error.pattern" ng-message="pattern" class="error">Last Name is invalid</p>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Email" ng-model="addUserVm.newUser.email" required>
-        <div ng-messages="userForm.email.$error" ng-if="userForm.email.$dirty">
-            <p ng-message="required" class="error">Email is required</p>
-            <p ng-message="email" class="error">Email is invalid</p>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username"
+                   ng-model="signupVm.newUser.username" required ng-minlength="6" ng-maxlength="16">
+            <div ng-messages="signupForm.username.$error" ng-if="signupForm.username.$dirty">
+                <p ng-show="signupForm.username.$error.required" ng-message="required" class="error">Username is required</p>
+                <p ng-show="signupForm.username.$error.minlength" ng-message="minlength" class="error">Username has to be at least 6 chars</p>
+                <p ng-show="signupForm.username.$error.maxlength" ng-message="maxlength" class="error">Username cannot be more than 16 chars</p>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="city">City</label>
-        <input type="text" class="form-control" id="city" name="city" placeholder="City" ng-model="addUserVm.newUser.address.city" required>
-        <div ng-messages="userForm.city.$error" ng-if="userForm.city.$dirty">
-            <p ng-message="required" class="error">City is required</p>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                   ng-model="signupVm.newUser.password" required ng-minlength="6">
+            <div ng-messages="signupForm.password.$error" ng-if="signupForm.password.$dirty">
+                <p ng-show="signupForm.password.$error.required" ng-message="required" class="error">Password is required</p>
+                <p ng-show="signupForm.password.$error.minlength" ng-message="minlength" class="error">Password is too weak</p>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="company">Company</label>
-        <input type="text" class="form-control" id="company" name="company" placeholder="Company" ng-model="addUserVm.newUser.company.name" required>
-        <div ng-messages="userForm.company.$error" ng-if="userForm.company.$dirty">
-            <p ng-message="required" class="error">Company is required</p>
+        <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" name="city" placeholder="City"
+                   ng-model="signupVm.newUser.city">
         </div>
-    </div>
-    <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
-</form>
+        <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" class="form-control" id="state" name="state" placeholder="State"
+                   ng-model="signupVm.newUser.state">
+        </div>
+        <div class="form-group">
+            <label for="zipcode">Zip Code</label>
+            <input type="number" class="form-control" id="zipcode" name="zipcode" placeholder="Zip Code"
+                   ng-model="signupVm.newUser.zipCode">
+        </div>
+        <button type="submit" class="btn btn-primary formButton" ng-disabled="signupForm.$invalid">Register</button>
+    </form>
+</div>

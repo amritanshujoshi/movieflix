@@ -9,7 +9,7 @@
 
         $routeProvider
             .when('/login', {
-                templateUrl: 'app/user/views/signup.tmpl.html',
+                templateUrl: 'app/user/views/login.tmpl.html',
                 controller: 'LoginController',
                 controllerAs: 'loginVm'
             })
@@ -54,7 +54,7 @@
                 controllerAs: 'moviesAdminVm'
             })
             .otherwise({
-                redirectTo: '/user/movies'
+                redirectTo: '/login'
             });
         /*.when('/user/movie/:id', {
          templateUrl: 'app/user/views/movie-detail.tmpl.html',
