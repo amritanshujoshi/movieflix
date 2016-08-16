@@ -13,6 +13,8 @@
 
         self.getMovies = getMovies;
         self.getMovieByTitle = getMovieByTitle;
+        self.getReviewsByMovie = getReviewsByMovie;
+        self.getMovieAvgRating = getMovieAvgRating;
         self.getTopRatedMovies = getTopRatedMovies;
         self.getTopVotedMovies = getTopVotedMovies;
         self.getTopRatedSeries = getTopRatedSeries;
@@ -26,6 +28,16 @@
 
         function getMovieByTitle(title) {
             return $http.get('http://localhost:8080/project-api/api/movies/' + title)
+                .then(successFn, errorFn);
+        }
+
+        function getReviewsByMovie(title) {
+            return $http.get('http://localhost:8080/project-api/api/reviews/' + title)
+                .then(successFn, errorFn);
+        }
+
+        function getMovieAvgRating(title) {
+            return $http.get('http://localhost:8080/project-api/api/reviews/averageRating/' + title)
                 .then(successFn, errorFn);
         }
 

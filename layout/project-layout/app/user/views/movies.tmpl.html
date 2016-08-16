@@ -27,15 +27,21 @@
         <thead>
         <tr>
             <th ng-click="moviesVm.changeSort('title')">Movie</th>
-            <th>Actors</th>
             <th ng-click="moviesVm.changeSort('year')">Year</th>
+            <th ng-click="moviesVm.changeSort('type')">Type</th>
+            <th ng-click="moviesVm.changeSort('imdbVotes')">IMDB Votes</th>
+            <th ng-click="moviesVm.changeSort('imdbRating')">IMDB Ratings</th>
+
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="movie in moviesVm.movies | filter:moviesVm.searchText | orderBy: moviesVm.sorter.by:moviesVm.sorter.reverse">
             <td><a class="listlink" ng-href="#/user/movies/{{movie.title}}">{{movie.title}}</a></td>
-            <td>{{movie.actor}}</td>
             <td>{{movie.year}}</td>
+            <td ng-if="movie.type == 'series'">TV Show</td>
+            <td ng-if="movie.type == 'movie'">Movie</td>
+            <td>{{movie.imdbVotes | number:0}}</td>
+            <td>{{movie.imdbRating}}/10</td>
         </tr>
         </tbody>
     </table>

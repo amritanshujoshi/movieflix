@@ -1,4 +1,23 @@
 <div class="container">
+    <nav class="navbar navbar-default nav-pills">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand page-title" href="#/user/movies"><h2>Movieflix</h2>
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/user/movies">All Shows<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/user/movies/topRated">Top Rated Movies<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/user/movies/topVoted">Top Voted Movies<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/user/series/topRated">Top Rated Series<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/user/series/topVoted">Top Voted Series<span class="sr-only">(current)</span></a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
     <h2>Movie Details<a href="#users/movies" class="pull-right btn btn-link">Back</a></h2>
     <div class="movieDetails">
         <p>
@@ -18,11 +37,34 @@
         <p class="moviePlot"><span class="label">Plot:</span>
         <p class="plot">{{movieDetailVm.movie.plot}}</p></p><br>
         <p class="movieAwards"><span class="label">Awards and Nominations:</span> {{movieDetailVm.movie.awards}}</p><br>
+        <p class="userRating" ng-if="movieDetailVm.avgRating == 0"><span class="label">Average User Rating:</span> Not Yet Rated! <br></p>
+        <p class="userRating" ng-if="movieDetailVm.avgRating != 0"><span class="label">Average User Rating:</span> {{movieDetailVm.avgRating | number:2}}/5<br></p>
         <p class="imdbDetails">
             <span class="label">IMDB Rating:</span> {{movieDetailVm.movie.imdbRating}}/10
-            <span class="label">IMDB Votes:</span> {{movieDetailVm.movie.imdbVotes}}
+            <span class="label">IMDB Votes:</span> {{movieDetailVm.movie.imdbVotes | number:0}}
             <span class="label">IMDB Profile:</span> <a
                 ng-href='http://www.imdb.com/title/{{movieDetailVm.movie.imdbID}}' target="_blank">Go
             to IMDB Profile</a></p><br>
     </div>
+    <h2>Reviews</h2>
+    <div class="movieReviews">
+        <table class="table table-striped table-hover list">
+            <thead>
+            <tr>
+                <th ng-click="movieDetailVm.changeSort('user.username')">User</th>
+                <th ng-click="movieDetailVm.changeSort('rating')">Rating(Out of 5)</th>
+                <th>Comment</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="review in movieDetailVm.reviews | orderBy: movieDetailVm.sorter.by:movieDetailVm.sorter.reverse">
+                <td>{{review.user.firstName}} {{review.user.lastName}}</td>
+                <td>{{review.rating}}</td>
+                <td>{{review.comment}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span><button type="submit" class="btn btn-primary">Add a Review</button>
 </div>
