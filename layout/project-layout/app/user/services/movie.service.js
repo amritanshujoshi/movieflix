@@ -15,6 +15,7 @@
         self.getMovieByTitle = getMovieByTitle;
         self.getReviewsByMovie = getReviewsByMovie;
         self.getMovieAvgRating = getMovieAvgRating;
+        self.addReviewToMovie = addReviewToMovie;
         self.getTopRatedMovies = getTopRatedMovies;
         self.getTopVotedMovies = getTopVotedMovies;
         self.getTopRatedSeries = getTopRatedSeries;
@@ -41,6 +42,11 @@
                 .then(successFn, errorFn);
         }
 
+        function addReviewToMovie(review) {
+            return $http.post('http://localhost:8080/project-api/api/reviews' + review.movie.id + '/' + review.user.id, review)
+                .then(successFn, errorFn);
+        }
+
         function getTopRatedMovies() {
             return $http.get('http://localhost:8080/project-api/api/movies/topRated/movie')
                 .then(successFn, errorFn);
@@ -62,13 +68,13 @@
         }
 
         /*function deleteMovie(title, data) {
-            return $http.delete('http://localhost:8080/project-api/api/movies/' + title, data)
-                .then(delSuccessFn, errorFn)
-        }
+         return $http.delete('http://localhost:8080/project-api/api/movies/' + title, data)
+         .then(delSuccessFn, errorFn)
+         }
 
-        function delSuccessFn() {
-            return 'Movie Deleted!!';
-        }*/
+         function delSuccessFn() {
+         return 'Movie Deleted!!';
+         }*/
 
         function successFn(response) {
             return response.data;
