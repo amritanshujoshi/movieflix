@@ -32,6 +32,15 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	public User login(String username, String password) {
+		User existing = userRepository.login(username, password);
+		if (existing == null) {
+			throw new UserNotFoundException("User with username " + username + " does not exist.");
+		}
+		return existing;
+	}	
+	
+	@Override
 	@Transactional
 	public User create(User user) {
 		User existing = userRepository.findByUsername(user.getUsername());
@@ -59,6 +68,6 @@ public class UserServiceImpl implements UserService {
 			throw new UserNotFoundException("User with id:" + id + " not found.");
 		}
 		userRepository.delete(existing);
-	}	
+	}
 
 }

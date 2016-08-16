@@ -37,6 +37,18 @@ public class UserRepositoryImpl implements UserRepository{
 		}
 		return null;
 	}
+	
+	@Override
+	public User login(String username, String password) {
+		TypedQuery<User> query = em.createNamedQuery("User.login", User.class);
+		query.setParameter("pUsername", username);
+		query.setParameter("pPassword", password);
+		List<User> users = query.getResultList();
+		if (users != null && users.size() == 1) {
+			return users.get(0);
+		}
+		return null;
+	}	
 
 	@Override
 	public User create(User user) {
@@ -52,6 +64,6 @@ public class UserRepositoryImpl implements UserRepository{
 	@Override
 	public void delete(User user) {
 		em.remove(user);
-	}	
+	}
 
 }

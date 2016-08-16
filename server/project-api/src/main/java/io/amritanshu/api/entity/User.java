@@ -13,7 +13,8 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table
 @NamedQueries({ @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username=:pUsername"),
-		@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u ORDER BY u.firstName ASC") })
+		@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u ORDER BY u.firstName ASC"),
+		@NamedQuery(name = "User.login", query = "SELECT u FROM User u WHERE u.username=:pUsername AND u.password=:pPassword") })
 public class User {
 
 	@Id

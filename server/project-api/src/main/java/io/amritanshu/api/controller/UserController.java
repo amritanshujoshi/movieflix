@@ -30,6 +30,11 @@ public class UserController {
 		return userService.findOne(userId);
 	}
 
+	@RequestMapping(method = RequestMethod.POST, path = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public User login(@RequestBody User user) {
+		return userService.login(user.getUsername(), user.getPassword());
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public User create(@RequestBody User user) {
 		return userService.create(user);

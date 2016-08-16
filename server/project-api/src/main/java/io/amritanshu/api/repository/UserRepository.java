@@ -11,6 +11,8 @@ public interface UserRepository {
 	public User findOne(String id);
 	
 	public User findByUsername(String username);
+	
+	public User login(String username, String password);
 
 	public User create(User user);
 
