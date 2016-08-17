@@ -4,15 +4,16 @@
     angular.module('movieflix')
         .controller('MovieDetailController', MovieDetailController);
 
-    MovieDetailController.$inject = ['movieService', '$routeParams'];
+    MovieDetailController.$inject = ['movieService', '$routeParams', '$route'];
 
-    function MovieDetailController(movieService, $routeParams) {
+    function MovieDetailController(movieService, $routeParams, $route) {
         var movieDetailVm = this;
 
         movieDetailVm.reviews = [];
         movieDetailVm.avgRating = 0;
 
         movieDetailVm.changeSort = changeSort;
+        movieDetailVm.createReview = createReview;
 
         init();
 
@@ -46,6 +47,29 @@
                 }, function (error) {
                     console.log(error);
                 });
+        }
+
+        function createReview() {
+
+            /*
+            For Testing!!
+             */
+            movieDetailVm.newReview.user_id = "2f0bccff-1f2a-40db-a4f4-89408cb969d5"
+            /*
+            For Testing!!
+             */
+
+            movieDetailVm.newReview.movie_id = movieDetailVm.movie.id;
+
+                movieService
+                .addReviewToMovie(movieDetailVm.newReview)
+                .then(function (review) {
+                    $route.reload();
+                }, function (error) {
+                    console.log(error);
+                });
+
+            movieDetailVm.newReview = {};
         }
 
         function changeSort(prop) {

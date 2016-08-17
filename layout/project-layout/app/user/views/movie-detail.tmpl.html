@@ -37,8 +37,10 @@
         <p class="moviePlot"><span class="label">Plot:</span>
         <p class="plot">{{movieDetailVm.movie.plot}}</p></p><br>
         <p class="movieAwards"><span class="label">Awards and Nominations:</span> {{movieDetailVm.movie.awards}}</p><br>
-        <p class="userRating" ng-if="movieDetailVm.avgRating == 0"><span class="label">Average User Rating:</span> Not Yet Rated! <br></p>
-        <p class="userRating" ng-if="movieDetailVm.avgRating != 0"><span class="label">Average User Rating:</span> {{movieDetailVm.avgRating | number:2}}/5<br></p>
+        <p class="userRating" ng-if="movieDetailVm.avgRating == 0"><span class="label">Average User Rating:</span> Not
+            Yet Rated! <br></p>
+        <p class="userRating" ng-if="movieDetailVm.avgRating != 0"><span class="label">Average User Rating:</span>
+            {{movieDetailVm.avgRating | number:2}}/5<br></p>
         <p class="imdbDetails">
             <span class="label">IMDB Rating:</span> {{movieDetailVm.movie.imdbRating}}/10
             <span class="label">IMDB Votes:</span> {{movieDetailVm.movie.imdbVotes | number:0}}
@@ -64,7 +66,31 @@
             </tr>
             </tbody>
         </table>
+        <form name="reviewForm" ng-submit="reviewForm.$setPristine(); movieDetailVm.createReview()">
+            <table class="table table-striped table-hover list">
+                <tbody>
+                <tr>
+                    <td class="reviewForm">Amritanshu Joshi</td>
+                    <td class="reviewForm"><select name="rating" id="rating" ng-model="movieDetailVm.newReview.rating">
+                        <option value="">Select a rating</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select></td>
+                    <td class="reviewForm"><textarea class="form-control" id="comment" name="comment"
+                                                     placeholder="Comment"
+                                                     ng-model="movieDetailVm.newReview.comment"></textarea></td>
+                    <td class="reviewForm">
+                        <button type="submit" class="btn btn-primary reviewButton"><span
+                                class="glyphicon glyphicon-plus"
+                                aria-hidden="true"></span>Add Review
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
     </div>
-
-    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span><button type="submit" class="btn btn-primary">Add a Review</button>
 </div>

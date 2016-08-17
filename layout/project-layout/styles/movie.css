@@ -109,3 +109,16 @@
 .userRating {
     margin: -1em 0 1.5em 0;
 }
+
+.glyphicon-plus {
+    margin-right: 0.5em;
+}
+
+.reviewForm{
+    vertical-align: middle;
+}
+
+.reviewButton {
+    float: right;
+    width: 100%;
+}

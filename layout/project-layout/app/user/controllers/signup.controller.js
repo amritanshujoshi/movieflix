@@ -21,7 +21,7 @@
         function addUser() {
             signupService
                 .createUser(signupVm.newUser)
-                .then(function (data) {
+                .then(function () {
                     $location.path('/login');
                 }, function (error) {
                     console.log(error);
