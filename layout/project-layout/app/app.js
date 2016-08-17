@@ -53,6 +53,11 @@
                 controller: 'MoviesAdminController',
                 controllerAs: 'moviesAdminVm'
             })
+            .when('/admin/addMovie', {
+                templateUrl: 'app/admin/views/movie-add.tmpl.html',
+                controller: 'MoviesAdminController',
+                controllerAs: 'moviesAdminVm'
+            })
             .otherwise({
                 redirectTo: '/login'
             });

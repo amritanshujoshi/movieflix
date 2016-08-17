@@ -6,3 +6,23 @@
 .btn-danger {
     border-radius: 5px;
 }
+
+.createMovieButton {
+    width: 15% !important;
+}
+
+.genreList {
+    margin-left: 4em;
+    vertical-align: center;
+    font-size: 1.5em;
+    width: 15%;
+}
+
+.genreLabel {
+    float:left;
+    margin-top: 2.5em;
+}
+
+.typeRadio {
+    margin-left: 0.5em;
+}
