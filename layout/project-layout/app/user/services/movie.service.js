@@ -21,7 +21,8 @@
         self.getTopRatedSeries = getTopRatedSeries;
         self.getTopVotedSeries = getTopVotedSeries;
         self.createMovie = createMovie;
-        /*self.deleteMovie = deleteMovie;*/
+        self.editMovie = editMovie;
+        self.deleteMovie = deleteMovie;
 
         function getMovies() {
             return $http.get('http://localhost:8080/project-api/api/movies')
@@ -75,6 +76,16 @@
         function createMovie(movie) {
             return $http.post('http://localhost:8080/project-api/api/movies', movie)
                 .then(successFn, errorFn);
+        }
+
+        function editMovie(movie) {
+            return $http.put('http://localhost:8080/project-api/api/movies/' + movie.title, movie)
+                .then(successFn, errorFn);
+        }
+
+        function deleteMovie(title) {
+            return $http.delete('http://localhost:8080/project-api/api/movies/' + title)
+                .then(successFn, errorFn)
         }
 
         function successFn(response) {

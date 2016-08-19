@@ -55,8 +55,9 @@
 
 body {
     font: 100% Cantarell, Arial, Helvetica, sans-serif;
-    background: #eee;
+    /*background: #eee;*/
 }
+
 
 h1 {
     margin-top: 1em;

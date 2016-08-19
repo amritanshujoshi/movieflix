@@ -22,21 +22,21 @@
     <table class="table table-striped table-hover list">
         <thead>
         <tr>
+            <th></th>
             <th ng-click="moviesVm.changeSort('title')">Movie</th>
             <th>Actors</th>
             <th ng-click="moviesVm.changeSort('year')">Year</th>
-            <th>Edit</th>
-            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="movie in moviesAdminVm.movies | filter:moviesAdminVm.searchText | orderBy: moviesAdminVm.sorter.by:moviesAdminVm.sorter.reverse">
+            <td><input type="radio" ng-model="moviesAdminVm.selectedValue" name="selectedTitle" value="{{movie.title}}" /></td>
             <td>{{movie.title}}</td>
             <td>{{movie.actor}}</td>
             <td>{{movie.year}}</td>
-            <td class="action"><button class="btn-danger">Edit</button></td>
-            <td class="action"><i ng-click="moviesVm.deleteMovie(movie.title)" class="glyphicon glyphicon-remove"></i></td>
         </tr>
         </tbody>
     </table>
+    <button class="btn btn-info actionMovieButton" ng-disabled="!moviesAdminVm.selectedValue" ng-click="moviesAdminVm.editRedirect(moviesAdminVm.selectedValue)">Edit</button>
+    <button class="btn btn-danger actionMovieButton" ng-disabled="!moviesAdminVm.selectedValue" ng-click="moviesAdminVm.delMovie(moviesAdminVm.selectedValue)">Delete</button>
 </div>

@@ -1,0 +1,156 @@
+<div class="container">
+    <nav class="navbar navbar-default nav-pills">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand page-title" href="#/admin/movies"><h2>Movieflix</h2>
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/admin/movies">All Titles<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/admin/addMovie">Add Movie</a></li>
+                </ul>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+    <form name="editMovieForm" ng-submit="editMovieForm.$setPristine(); movieEditVm.editMovie()">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Movie Title"
+                   ng-model="movieEditVm.movie.title" required>
+            <div ng-messages="editMovieForm.title.$error" ng-if="editMovieForm.title.$dirty">
+                <p ng-show="editMovieForm.title.$error.required" ng-message="required" class="error">Title is
+                    required</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="year">Year</label>
+            <input type="number" class="form-control" id="year" name="year" placeholder="Year"
+                   ng-model="movieEditVm.movie.year" required pattern="^[1-2][0-9][0-9][0-9]$">
+            <div ng-messages="editMovieForm.year.$error" ng-if="editMovieForm.year.$dirty">
+                <p ng-show="editMovieForm.year.$error.required" ng-message="required" class="error">Year is required</p>
+                <p ng-show="editMovieForm.year.$error.pattern" ng-message="pattern" class="error">Year is invalid</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="rated">Rating</label>
+            <input type="text" class="form-control" id="rated" name="rated" placeholder="Rating"
+                   ng-model="movieEditVm.movie.rated" required>
+            <div ng-messages="editMovieForm.rated.$error" ng-if="editMovieForm.rated.$dirty">
+                <p ng-show="editMovieForm.rated.$error.required" ng-message="required" class="error">Rating is
+                    required</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="released">Release Date(dd Mmm yyyy)</label>
+            <input type="text" class="form-control" id="released" name="released" placeholder="Release Date"
+                   ng-model="movieEditVm.movie.released" required
+                   pattern="^(0?[1-9]|[12][0-9]|3[01]) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ([1-2][0-9][0-9][0-9])$">
+            <div ng-messages="editMovieForm.released.$error" ng-if="editMovieForm.released.$dirty">
+                <p ng-show="editMovieForm.released.$error.required" ng-message="required" class="error">Release Date is
+                    required</p>
+                <p ng-show="editMovieForm.released.$error.pattern" ng-message="pattern" class="error">Release Date is
+                    invalid</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="runtime">Runtime</label>
+            <input type="text" class="form-control" id="runtime" name="runtime" placeholder="Runtime"
+                   ng-model="movieEditVm.movie.runtime" required>
+            <div ng-messages="editMovieForm.runtime.$error" ng-if="editMovieForm.runtime.$dirty">
+                <p ng-show="editMovieForm.runtime.$error.required" ng-message="required" class="error">Runtime is
+                    required</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="genreLabel" for="genreSelect">Genres</label>
+            <select size='4' class="genreList" name="genreSelect" id="genreSelect"
+                    ng-model="movieEditVm.movie.genres" multiple>
+                <option ng-repeat="genre in movieEditVm.genres" value="{{genre.value}}">{{genre.name}}</option>
+            </select>
+            <span class="alreadyGenre">(Selected Values: <span ng-repeat="genre in movieEditVm.movie.genres"> {{genre.name}} </span>)</span>
+        </div>
+        <div class="form-group">
+            <label for="director">Director</label>
+            <input type="text" class="form-control" id="director" name="director" placeholder="Director"
+                   ng-model="movieEditVm.movie.director" required>
+        </div>
+        <div ng-messages="editMovieForm.director.$error" ng-if="editMovieForm.director.$dirty">
+            <p ng-show="editMovieForm.director.$error.required" ng-message="required" class="error">Director is
+                required</p>
+        </div>
+        <div class="form-group">
+            <label for="writer">Writer/s</label>
+            <textarea class="form-control" id="writer" name="writer" placeholder="Writers"
+                      ng-model="movieEditVm.movie.writer" required></textarea>
+        </div>
+        <div ng-messages="editMovieForm.writer.$error" ng-if="editMovieForm.writer.$dirty">
+            <p ng-show="editMovieForm.writer.$error.required" ng-message="required" class="error">Writer is required</p>
+        </div>
+        <div class="form-group">
+            <label for="actor">Actor/s</label>
+            <textarea class="form-control" id="actor" name="actor" placeholder="Actors"
+                      ng-model="movieEditVm.movie.actor" required></textarea>
+        </div>
+        <div ng-messages="editMovieForm.actor.$error" ng-if="editMovieForm.actor.$dirty">
+            <p ng-show="editMovieForm.actor.$error.required" ng-message="required" class="error">Actor is required</p>
+        </div>
+        <div class="form-group">
+            <label for="plot">Plot</label>
+            <textarea class="form-control" id="plot" name="plot" placeholder="Plot"
+                      ng-model="movieEditVm.movie.plot" required></textarea>
+        </div>
+        <div ng-messages="editMovieForm.plot.$error" ng-if="editMovieForm.plot.$dirty">
+            <p ng-show="editMovieForm.plot.$error.required" ng-message="required" class="error">Plot is required</p>
+        </div>
+        <div class="form-group">
+            <label for="awards">Award and Nominations</label>
+            <textarea class="form-control" id="awards" name="awards" placeholder="Awards and Nominations"
+                      ng-model="movieEditVm.movie.awards"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="imdbRating">IMDB Rating</label>
+            <input type="text" class="form-control" id="imdbRating" name="imdbRating" placeholder="IMDB Rating"
+                   ng-model="movieEditVm.movie.imdbRating" required>
+        </div>
+        <div ng-messages="editMovieForm.imdbRating.$error" ng-if="editMovieForm.imdbRating.$dirty">
+            <p ng-show="editMovieForm.imdbRating.$error.required" ng-message="required" class="error">IMDB Rating is
+                required</p>
+        </div>
+        <div class="form-group">
+            <label for="imdbVotes">IMDB Votes</label>
+            <input type="number" class="form-control" id="imdbVotes" name="imdbVotes" placeholder="IMDB Votes"
+                   ng-model="movieEditVm.movie.imdbVotes" required>
+        </div>
+        <div ng-messages="editMovieForm.imdbVotes.$error" ng-if="editMovieForm.imdbVotes.$dirty">
+            <p ng-show="editMovieForm.imdbVotes.$error.required" ng-message="required" class="error">IMDB Votes is
+                required</p>
+        </div>
+        <div class="form-group">
+            <label for="imdbID">IMDB ID</label>
+            <input type="text" class="form-control" id="imdbID" name="imdbID" placeholder="IMDB ID"
+                   ng-model="movieEditVm.movie.imdbID" required>
+        </div>
+        <div ng-messages="editMovieForm.imdbID.$error" ng-if="editMovieForm.imdbID.$dirty">
+            <p ng-show="editMovieForm.imdbID.$error.required" ng-message="required" class="error">IMDB ID is
+                required</p>
+        </div>
+        <div class="form-group">
+            <label>Type</label><br>
+            <label class="typeRadio">
+                <input type="radio" ng-model="movieEditVm.movie.type" value="movie">
+                Movie
+            </label>
+            <label class="typeRadio">
+                <input type="radio" ng-model="movieEditVm.movie.type" value="series">
+                TV Show
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary createMovieButton" ng-disabled="editMovieForm.$invalid">Submit
+            Changes
+        </button>
+    </form>
+</div>

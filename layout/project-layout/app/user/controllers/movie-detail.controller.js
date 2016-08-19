@@ -54,7 +54,7 @@
             /*
             For Testing!!
              */
-            movieDetailVm.newReview.user_id = "2f0bccff-1f2a-40db-a4f4-89408cb969d5"
+            movieDetailVm.newReview.user_id = "50b36d6c-9473-44dd-837e-effd2a5e658c";
             /*
             For Testing!!
              */
