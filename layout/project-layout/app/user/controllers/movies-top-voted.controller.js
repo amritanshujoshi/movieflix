@@ -16,8 +16,8 @@
         function init() {
 
             moviesTopVotedVm.sorter = {
-                by: 'title',
-                reverse: false
+                by: 'imdbVotes',
+                reverse: true
             };
 
             movieService

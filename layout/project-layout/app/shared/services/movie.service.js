@@ -85,7 +85,7 @@
 
         function deleteMovie(title) {
             return $http.delete('http://localhost:8080/project-api/api/movies/' + title)
-                .then(successFn, errorFn)
+                .then(successFn, errorFn);
         }
 
         function successFn(response) {
