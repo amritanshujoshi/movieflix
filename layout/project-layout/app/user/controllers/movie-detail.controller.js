@@ -63,7 +63,7 @@
 
                 movieService
                 .addReviewToMovie(movieDetailVm.newReview)
-                .then(function (review) {
+                .then(function () {
                     $route.reload();
                 }, function (error) {
                     console.log(error);

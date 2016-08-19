@@ -20,7 +20,7 @@
     </nav>
 
     <div class="row">
-        <input type="search" ng-model="moviesVm.searchText.title" placeholder="Start typing here..."
+        <input type="search" ng-model="moviesVm.searchParam" placeholder="Start typing here..."
                class="form-control searchBox">
     </div>
     <table class="table table-striped table-hover list">
@@ -29,17 +29,19 @@
             <th ng-click="moviesVm.changeSort('title')">Movie</th>
             <th ng-click="moviesVm.changeSort('year')">Year</th>
             <th ng-click="moviesVm.changeSort('type')">Type</th>
+            <th ng-click="moviesVm.changeSort('genres')">Genres</th>
             <th ng-click="moviesVm.changeSort('imdbVotes')">IMDB Votes</th>
             <th ng-click="moviesVm.changeSort('imdbRating')">IMDB Ratings</th>
 
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="movie in moviesVm.movies | filter:moviesVm.searchText | orderBy: moviesVm.sorter.by:moviesVm.sorter.reverse">
+        <tr ng-repeat="movie in moviesVm.movies | filter:moviesVm.searchParam | orderBy: moviesVm.sorter.by:moviesVm.sorter.reverse">
             <td><a class="listlink" ng-href="#/user/movies/{{movie.title}}">{{movie.title}}</a></td>
             <td>{{movie.year}}</td>
             <td ng-if="movie.type == 'series'">TV Show</td>
             <td ng-if="movie.type == 'movie'">Movie</td>
+            <td><span ng-repeat="genre in movie.genres">{{genre.name}} </span></td>
             <td>{{movie.imdbVotes | number:0}}</td>
             <td>{{movie.imdbRating}}/10</td>
         </tr>

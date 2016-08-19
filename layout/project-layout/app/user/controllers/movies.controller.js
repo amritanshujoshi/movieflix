@@ -9,6 +9,8 @@
     function MoviesController(movieService) {
         var moviesVm = this;
 
+        moviesVm.searchParam = '';
+
         moviesVm.changeSort = changeSort;
 
         init();
